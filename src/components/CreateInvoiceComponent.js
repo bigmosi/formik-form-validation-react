@@ -73,6 +73,12 @@ const ErrorLabel = styled.div`
   color: red;
 `
 
+const FileInput = styled.input`
+  margin-top: 10px;
+  font-size: 16px;
+`
+
+
 const CreateInvoiceSchema = Yup.object().shape({
    email: Yup.string().email("Invalid email").required("Email can't be empty"),
    projectName: Yup.string().required("Project name can't be empty"),
@@ -91,12 +97,13 @@ class CreateInvoiceComponent extends React.Component {
   }
 
   handleSubmit(values, actions) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve()
-        alert(JSON.stringify(values))
-      }, 2000)
-    });
+    alert(this.fileInput.current);
+    // return new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     resolve()
+    //     alert(JSON.stringify(values))
+    //   }, 2000)
+    // });
   }
 
   render() {
@@ -129,6 +136,9 @@ class CreateInvoiceComponent extends React.Component {
                 </ErrorMessage>
 
                 <RatingFieldInput name="rating" label={"Project Rating"}/>
+
+                <Label>Upload receipt(s)</Label>
+                <FileInput type="file" ref={this.fileInput} />
 
                 <SubmitButton type="submit" disabled={props.isSubmitting}/>
               </CreateInvoiceForm>
